@@ -1,0 +1,46 @@
+version: '3'
+services:
+  pim-db:
+    container_name: mysql-service
+    image: mysql:8.0.16
+    command: [
+            --wait_timeout=28800,
+            --lower_case_table_names=1
+            ]
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_ROOT_HOST: "%"
+      TZ: Europe/Berlin
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+      - ./mysql-data:/var/lib/mysql
+    ports:
+      - "${MYSQL_PORT}:3306"
+    restart: "unless-stopped"
+    networks:
+      - pim-db-network
+      - mysql-network
+
+  pim-myadmin:
+    container_name: pim-myadmin-service
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: pim-db
+    depends_on:
+      - pim-db
+    ports:
+      - "${PMA_PORT}:80"
+    restart: "always"
+    networks:
+      - pim-db-network
+
+networks:
+  pim-db-network:
+  mysql-network:
+    external: true
+volumes:
+  mysql-data:
+  init:
