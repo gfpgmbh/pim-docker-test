@@ -47,6 +47,8 @@ sudo chmod +x /usr/local/bin/docker-compose
 sudo usermod -aG docker lpim
 ```
 
+<p>For the changes to take effect, you may have to close the console and log in again.</p>
+
 ### Docker authentication
 
 ```
@@ -133,3 +135,25 @@ docker-compose up -d
 http://127.0.0.1/pim/ - PIM Application
 
 http://127.0.0.1:8080 - PhpMyAdmin, DB Administration Tool
+
+### Aliases
+
+<p>In order for aliases or short commands to be available, you need to add them to the /home/lpim/.bashrc file.</p>
+
+```
+nano /home/lpim/.bashrc
+```
+
+<p>Add the following text to the very end of the file.</p>
+
+```
+alias pim-down="docker-compose -f /home/lpim/pim-docker-test/app/docker-compose.yml down"
+alias pim-stop="docker-compose -f /home/lpim/pim-docker-test/app/docker-compose.yml stop"
+alias pim-clear-repo="sudo rm -rf /home/lpim/pim-docker-test/app/repo/*"
+alias pim-up="docker-compose -f /home/lpim/pim-docker-test/app/docker-compose.yml up -d"
+alias pim-update="docker-compose -f /home/lpim/pim-docker-test/app/docker-compose.yml down ; docker-compose -f /home/lpim/pim-docker-test/app/docker-compose.yml rm -f ; docker-compose -f /home/lpim/pim-docker-test/app/docker-compose.yml pull ; docker-compose -f /home/lpim/pim-docker-test/app/docker-compose.yml up -d"
+```
+
+<p>To Save and Exit press: Ctrl+o, Enter, Ctrl+x.</p>
+
+<p>For the changes to take effect, you may have to close the console and log in again.</p>
