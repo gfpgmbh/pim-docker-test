@@ -138,7 +138,7 @@ http://127.0.0.1:8080 - PhpMyAdmin, DB Administration Tool
 
 ### Aliases
 
-<p>In order for aliases or short commands to be available, you need to add them to the /home/lpim/.bashrc file.</p>
+<p>In order for aliases or short commands to be available, you need to add them to the <strong>/home/lpim/.bashrc</strong> file.</p>
 
 ```
 nano /home/lpim/.bashrc
