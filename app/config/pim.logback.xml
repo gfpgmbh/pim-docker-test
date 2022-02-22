@@ -1,0 +1,94 @@
+<configuration debug="false" scan="true" scanPeriod="30 seconds">
+
+	<insertFromJNDI env-entry-name="java:comp/env/logback/contextName" as="contextName" />
+	<contextName>${contextName}</contextName>
+	<insertFromJNDI env-entry-name="java:comp/env/logback/contextVersion" as="contextVersion" />
+	
+	<property name="destination" value="${catalina.base:-./temp}/logs/${contextName:-pim}${contextVersion:-.unversioned}" />
+	<property name="logPattern" value='%d{"dd.MM.yy HH:mm:ss.SSS"} [%.8thread] %-5level %logger - %msg%n%rEx' />
+
+	 <!-- propagates changes made to the level of any logback-classic logger onto the java.util.logging framework -->
+	 <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+    	<resetJUL>true</resetJUL>
+  	 </contextListener>
+
+	<!-- Console logger -->
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>${logPattern}</pattern>
+		</encoder>
+	</appender>
+
+	<!--  rolling file appender, respects the log-levels of all loggers as defined in the logger-hierarchy -->
+	<appender name="LOG"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!-- Do not use the file tag here. daily rollover won't work due to a renaming bug on windows systems. -->
+		<!-- http://logback.qos.ch/codes.html#renamingError -->
+		<!-- <file>${destination}.log</file> -->
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- rollover daily -->
+			<fileNamePattern>${destination}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<!-- or whenever the file size reaches X MB -->
+			<maxFileSize>100MB</maxFileSize>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${logPattern}</pattern>
+		</encoder>
+	</appender>
+
+	<!-- Rolling file appender for logging entries with level INFO and above -->
+	<appender name="LOG_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- rollover daily -->
+			<fileNamePattern>${destination}_info.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<!-- or whenever the file size reaches X MB -->
+			<maxFileSize>100MB</maxFileSize>
+		</rollingPolicy>
+		<!-- deny all events with a level below INFO -->
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      		<level>INFO</level>
+    	</filter>
+		<encoder>
+			<pattern>${logPattern}</pattern>
+		</encoder>
+	</appender>
+	
+	<!-- Rolling file appender for error logging only -->
+	<appender name="LOG_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- rollover daily -->
+			<fileNamePattern>${destination}_error.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<!-- or whenever the file size reaches X MB -->
+			<maxFileSize>100MB</maxFileSize>
+		</rollingPolicy>
+		<!-- deny all events with a level below ERROR -->
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      		<level>ERROR</level>
+    	</filter>
+		<encoder>
+			<pattern>${logPattern}</pattern>
+		</encoder>
+	</appender>
+
+	<!-- levels: TRACE, DEBUG, INFO, WARN, ERROR, ALL, OFF or INHERITED (case-insensitive) -->
+	<root level="INFO">
+		<appender-ref ref="CONSOLE"/>
+		<appender-ref ref="LOG_INFO"/>
+		<appender-ref ref="LOG_ERROR"/>
+		<appender-ref ref="LOG"/>
+	</root>
+
+	<logger name="de.gfpgmbh.apps.pim.server.csv.in" level="WARN"/>
+
+	<!-- loggers for hibernate sql statements and parameters -->
+ 	<!-- <logger name="org.hibernate.SQL" level="DEBUG"/> -->
+ 	<!-- <logger name="org.hibernate.type" level="TRACE"/> -->
+
+	<logger name="com.google.gwt.core.server.ServerGwtBridge" level="INFO"/>
+	
+	<!-- Logging for HTTP traffic of Apache's HTTPClient or RestEasy -->
+	<!-- logger name="org.apache.http.wire" level="DEBUG"/-->
+	
+	<!-- <logger name="de.gfpgmbh.apps.pim.server.bmecat.in.Protocol" level="DEBUG"/>  -->
+	
+</configuration>

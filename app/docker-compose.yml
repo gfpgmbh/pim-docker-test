@@ -1,0 +1,22 @@
+version: '3'
+services:
+  pim-app:
+    container_name: pim-service
+    image: gfpgmbh/pim:latest
+    environment:
+      JAVA_OPTIONS: "-Xmx8g -Xms2g"
+    volumes:
+      - ./config/pim.cfg:/var/lib/jetty/pim.cfg
+      - ./repo:/repo
+    ports:
+      - "80:8080"
+    restart: "unless-stopped"
+    networks:
+      - mysql-network
+
+networks:
+  mysql-network:
+    external: true
+volumes:
+  config:
+  repo:
