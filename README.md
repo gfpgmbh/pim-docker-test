@@ -10,7 +10,8 @@ sudo apt-get update
 ```
 
 > If there are any errors, then you need to disable the local repository by commenting out the first lines pointing to the CD-ROM. Otherwise, ignore this step.
-> >sudo nano /etc/apt/source.list
+>
+> sudo nano /etc/apt/source.list
 
 <p>Adding keys, repositories and installation.</p>
 
