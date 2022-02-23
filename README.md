@@ -37,12 +37,6 @@ sudo apt-get update
 >
 > sudo nano /etc/apt/sources.list
 
-<p>Just in case - try to install curl, if it not yet installed:</p>
-
-```
-sudo apt-get install curl
-```
-
 ### Docker installation
 
 <p>Adding keys, repositories and installation.</p>
