@@ -1,9 +1,33 @@
 ## Test Docker environment of the PIM application
 <p>The instruction describes the entire process of installing a PIM application on a clean Debian 11 system that has just been installed.</p>
 
-### Docker installation
+### Preparation
 
-<p>First of all, you need to update all packages.</p>
+<p>First of all, you need to check if current user is sudoer.</p>
+
+```
+su
+```
+
+<p>Enter the root-password</p>
+
+```
+nano /etc/sudoers
+```
+
+<p>Block "User privilege specification" should look like this</p>
+
+```
+...
+# User privilege specification
+root    ALL=(ALL:ALL) ALL
+lpim    ALL=(ALL:ALL) ALL
+...
+```
+
+<p>To Save and Exit press: Ctrl+o, Enter, Ctrl+x.</p>
+
+<p>Then, you need to update all packages.</p>
 
 ```
 sudo apt-get update
@@ -11,7 +35,15 @@ sudo apt-get update
 
 > If there are any errors, then you need to disable the local repository by commenting out the first lines pointing to the CD-ROM. Otherwise, ignore this step.
 >
-> sudo nano /etc/apt/source.list
+> sudo nano /etc/apt/sources.list
+
+<p>Just in case - try to install curl, if it not yet installed:</p>
+
+```
+sudo apt-get install curl
+```
+
+### Docker installation
 
 <p>Adding keys, repositories and installation.</p>
 
