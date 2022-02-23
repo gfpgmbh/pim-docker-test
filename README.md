@@ -9,13 +9,13 @@
 su
 ```
 
-<p>Enter the root-password</p>
+<p>Enter the root-password and then:</p>
 
 ```
 nano /etc/sudoers
 ```
 
-<p>Block "User privilege specification" should look like this</p>
+<p>Block "User privilege specification" should look like this:</p>
 
 ```
 ...
