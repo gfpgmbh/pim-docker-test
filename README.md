@@ -27,19 +27,13 @@ lpim    ALL=(ALL:ALL) ALL
 
 <p>To Save and Exit press: Ctrl+o, Enter, Ctrl+x.</p>
 
-<p>Then, you need to update all packages.</p>
-
-```
-sudo apt-get update
-```
-
 > If there are any errors, then you need to disable the local repository by commenting out the first lines pointing to the CD-ROM. Otherwise, ignore this step.
 >
 > sudo nano /etc/apt/sources.list
 
 ### Docker installation
 
-<p>Adding keys, repositories and installation.</p>
+<p>Install required applications, keys and repository.</p>
 
 ```
 sudo apt-get install ca-certificates curl gnupg lsb-release
@@ -50,6 +44,15 @@ sudo curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmo
 ```
 sudo echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 ```
+
+<p>Then, you need to update all packages.</p>
+
+```
+sudo apt-get update
+```
+
+<p>Finally install Docker.</p>
+
 ```
 sudo apt-get install docker-ce docker-ce-cli containerd.io
 ```
