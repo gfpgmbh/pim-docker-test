@@ -150,6 +150,12 @@ nano pim.cfg
 
 <p>Next, to Save and Exit press: Ctrl+o, Enter, Ctrl+x.</p>
 
+<p>Set access rights to the sessions folder.</p>
+
+```
+chmod 777 ../repo/session
+```
+
 ### Starting the Application service
 
 ```
