@@ -150,7 +150,7 @@ nano pim.cfg
 <p>Set access rights to the sessions folder.</p>
 
 ```
-chmod 777 ../repo/session
+chmod -R 777 ../repo
 ```
 
 ### Starting the Application service
