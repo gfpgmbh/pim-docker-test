@@ -27,6 +27,10 @@ lpim    ALL=(ALL:ALL) ALL
 
 <p>To Save and Exit press: Ctrl+o, Enter, Ctrl+x.</p>
 
+```
+sudo apt-get update
+```
+
 > If there are any errors, then you need to disable the local repository by commenting out the first lines pointing to the CD-ROM. Otherwise, ignore this step.
 >
 > sudo nano /etc/apt/sources.list
