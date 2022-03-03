@@ -3,29 +3,23 @@
 
 ### Preparation
 
-<p>First of all, you need to check if current user is sudoer.</p>
+<p>First of all, you need to createa a new lpim user.</p>
 
 ```
-su
+adduser lpim
 ```
 
-<p>Enter the root-password and then:</p>
+<p>After entering the necessary data, you need to enter the password twice.</p>
+
+<p>Then, you need to add the user to the sudo group.</p>
 
 ```
-nano /etc/sudoers
+usermod -aG sudo username
 ```
 
-<p>Block "User privilege specification" should look like this:</p>
+<p>After that, you should log out and log in again under a new user.</p>
 
-```
-...
-# User privilege specification
-root    ALL=(ALL:ALL) ALL
-lpim    ALL=(ALL:ALL) ALL
-...
-```
-
-<p>To Save and Exit press: Ctrl+o, Enter, Ctrl+x.</p>
+<p>To check the availability of rights, we perform:</p>
 
 ```
 sudo apt-get update
