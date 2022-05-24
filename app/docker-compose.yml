@@ -5,6 +5,7 @@ services:
     image: gfpgmbh/pim:latest
     environment:
       JAVA_OPTIONS: "-Xmx8g -Xms2g"
+      TZ: "Europe/Berlin"
     volumes:
       - ./config/pim.cfg:/var/lib/jetty/pim.cfg
       - ./repo:/repo
