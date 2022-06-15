@@ -1,5 +1,6 @@
 ## Test Docker environment of the PIM application
 <p>The instruction describes the entire process of installing a PIM application on a clean Debian 11 system that has just been installed.</p>
+<p>Es muss sichergestellt sein, dass der Port 80 freigegeben ist und Zugriff auf das Internet besteht (Port 433).</p>
 
 ### Preparation
 
