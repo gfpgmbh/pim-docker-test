@@ -4,7 +4,7 @@ services:
     container_name: pim-service
     image: gfpgmbh/pim:latest
     environment:
-      JAVA_OPTIONS: "-Xmx8g -Xms2g"
+      JAVA_OPTIONS: "-Xmx8g -Xms2g -Xss2m"
       TZ: "Europe/Berlin"
     volumes:
       - ./config/pim.cfg:/var/lib/jetty/pim.cfg
