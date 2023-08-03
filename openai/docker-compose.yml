@@ -1,0 +1,19 @@
+version: "3"
+services:
+  openai:
+    container_name: openai-service
+    image: gfpgmbh/pim-openai-service:0.0.3
+    ports:
+      - "${SERVER_PORT}:6666"
+    restart: "always"
+    volumes:
+      - ./.env:/env.properties
+    networks:
+      - redis-network
+      - kafka-network
+
+networks:
+  redis-network:
+    external: true
+  kafka-network:
+    external: true

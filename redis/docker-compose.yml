@@ -1,0 +1,20 @@
+version: "3"
+services:
+  cache:
+    container_name: cache-redis
+    image: redis:latest
+    command: redis-server --loglevel warning --requirepass ${REDIS_PASSWORD}
+    ports:
+      - "6379:6379"
+    restart: "always"
+    networks:
+      - redis-network
+    volumes:
+      - cache:/data
+
+networks:
+  redis-network:
+    external: true
+
+volumes:
+  cache:

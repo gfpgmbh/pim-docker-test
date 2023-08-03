@@ -191,3 +191,39 @@ alias pim-update="docker-compose -f /home/lpim/pim-docker-test/app/docker-compos
 <p>To Save and Exit press: Ctrl+o, Enter, Ctrl+x.</p>
 
 <p>For the changes to take effect, you may have to close the console and log in again.</p>
+
+## OpenAI + Kafka + Redis
+
+### Content of .env file for `/redis/.env`
+```
+REDIS_PASSWORD=replace_redis_pass
+```
+
+### Content of .env file for `/openai/.env`
+```
+SERVER_PORT=6666
+
+OPENAI_API_TOKEN=replace_openai_token
+OPENAI_THREADS_LIMIT=20
+OPENAI_TIMEOUT=300
+
+KAFKA_URL=kafka:9092
+KAFKA_TOPIC_PRODUCE=product-result-openai
+KAFKA_TOPIC_CONSUME=product-process-openai
+KAFKA_TOPIC_GROUP_ID=consumer-product-processing-group-id
+
+KAFKA_BATCH_SIZE=10
+KAFKA_LINGER_MS=2000
+ENABLE_AUTO_COMMIT=true
+AUTO_COMMIT_INTERVAL=1000
+
+REDIS_HOST=cache
+REDIS_PORT=6379
+REDIS_PASSWORD=replace_redis_pass
+```
+
+Run this in `/kafka`, `/redis` and `/openai` directories
+
+```
+docker-compose up -d
+```
