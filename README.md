@@ -201,6 +201,12 @@ docker network create redis-network
 docker network create kafka-network
 ```
 
+### Activate overcommit_memory for Redis
+
+```
+sudo sysctl vm.overcommit_memory=1
+```
+
 ### Content of .env file for `/redis/.env`
 ```
 REDIS_PASSWORD=replace_redis_pass
