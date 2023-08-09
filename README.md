@@ -194,6 +194,13 @@ alias pim-update="docker-compose -f /home/lpim/pim-docker-test/app/docker-compos
 
 ## OpenAI + Kafka + Redis
 
+### Create networks
+
+```
+docker network create redis-network
+docker network create kafka-network
+```
+
 ### Content of .env file for `/redis/.env`
 ```
 REDIS_PASSWORD=replace_redis_pass
