@@ -127,6 +127,12 @@ PMA_PORT=8080
 docker network create mysql-network
 ```
 
+<p>Optional: if access to PIM is from a different subnet, the subnet must be specified to avoid conflicts.</p>
+
+```
+docker network create --driver=bridge --subnet=192.168.111.0/24 --ip-range=192.168.111.0/24 mysql-network
+```
+
 <p>Creating and running a container in the background.</p>
 
 ```
