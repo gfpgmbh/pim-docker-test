@@ -5,6 +5,7 @@ services:
     image: mysql:8.1.0
     command: [
             --wait_timeout=28800,
+            --innodb-buffer-pool-size=64M,
             --lower_case_table_names=1
             ]
     environment:
