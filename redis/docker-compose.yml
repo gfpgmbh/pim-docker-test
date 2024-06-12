@@ -2,11 +2,11 @@ version: "3"
 services:
   cache:
     container_name: cache-redis
-    image: redis:6.2.13-alpine3.18
+    image: redis:7.2.4-alpine3.19
     command: redis-server --loglevel warning --requirepass ${REDIS_PASSWORD}
     ports:
       - "6379:6379"
-    restart: "always"
+    restart: "unless-stopped"
     networks:
       - redis-network
     volumes:
