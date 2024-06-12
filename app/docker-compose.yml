@@ -14,9 +14,18 @@ services:
     restart: "unless-stopped"
     networks:
       - mysql-network
+      - postgres-network
+      - redis-network
+      - kafka-network
 
 networks:
   mysql-network:
+    external: true
+  postgres-network:
+    external: true
+  redis-network:
+    external: true
+  kafka-network:
     external: true
 volumes:
   config:
