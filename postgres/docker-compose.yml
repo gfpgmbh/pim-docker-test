@@ -1,0 +1,41 @@
+version: "3.5"
+services:
+  postgres:
+    container_name: postgres-service
+    image: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      PGDATA: /data/postgres
+      TZ: Europe/Berlin
+    volumes:
+      - "postgres:/data/postgres"
+    ports:
+      - 5432:5432
+    restart: unless-stopped
+    networks:
+      - postgres-network
+
+  pgadmin:
+    container_name: pgadmin-service
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    depends_on:
+      - postgres
+    volumes:
+      - "pgadmin:/var/lib/pgadmin"
+    ports:
+      - 5050:80
+    restart: unless-stopped
+    networks:
+      - postgres-network
+
+networks:
+  postgres-network:
+    external: true
+
+volumes:
+  postgres:
+  pgadmin:
