@@ -2,7 +2,7 @@ version: "3"
 services:
   datamodel-service:
     container_name: datamodel-service
-    image: gfpgmbh/pim-datamodel-service:0.0.6
+    image: gfpgmbh/pim-datamodel-service:0.0.10
     ports:
       - "${SERVER_PORT}:8088"
     restart: unless-stopped
