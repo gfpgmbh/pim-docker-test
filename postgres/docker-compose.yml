@@ -10,6 +10,12 @@ services:
       TZ: Europe/Berlin
     volumes:
       - "postgres:/data/postgres"
+    command:
+      - "postgres"
+      - "-c"
+      - "shared_buffers=1GB"
+      - "-c"
+      - "work_mem=64MB"
     ports:
       - 5432:5432
     restart: unless-stopped
